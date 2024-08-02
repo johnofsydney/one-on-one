@@ -1,0 +1,44 @@
+<%= turbo_stream_from :notes %>
+
+<p style="color: green"><%= notice %></p>
+
+<%= render @event %>
+
+<%= form_with url: '/add_note_from_event', method: :post do %>
+  <%= hidden_field_tag :event_id, @event.id %>
+  <%= hidden_field_tag :manager_id, @event.manager.id %>
+  <div>
+    <%= label_tag :content, "Content (There's no login for this app, so we'll assume you're the manager of this event.)" %>
+    <br>
+    <%= text_area_tag :content %>
+  </div>
+  <div>
+    <%= submit_tag "Submit" %>
+  </div>
+<% end %>
+
+<div id="notes-list">
+  <% @event.notes.each do |note| %>
+    <%= render(partial: 'events/event_note', locals: { note: }) %>
+  <% end %>
+</div>
+
+
+<div id="links">
+  <%= link_to "Edit this event", edit_event_path(@event) %> |
+  <%= link_to "Back to events", events_path %>
+
+  <%= button_to "Destroy this event", @event, method: :delete %>
+</div>
+
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    const form = document.querySelector("form");
+    form.addEventListener("turbo:submit-end", function(event) {
+      if (event.detail.success) {
+        form.querySelector("textarea[name='content']").value = "";
+      }
+    });
+  });
+</script>

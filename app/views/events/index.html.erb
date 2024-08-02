@@ -1,0 +1,12 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Events</h1>
+
+<div id="events" class="flex">
+  <% @events.each do |event| %>
+    <%= render event %>
+
+  <% end %>
+</div>
+
+<%= link_to "New event", new_event_path %>

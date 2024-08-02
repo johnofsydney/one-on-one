@@ -1,0 +1,27 @@
+<div id="<%= dom_id event %>" class="event-card <%= event.status %>">
+
+  <p>
+    <%= link_to event.id, event %>
+  </p>
+
+  <p>
+    <strong>Manager:</strong>
+    <%= event.manager.name %>
+  </p>
+
+  <p>
+    <strong>Report:</strong>
+    <%= event.report.name %>
+  </p>
+
+  <p>
+    <strong>Start time:</strong>
+    <%= event.start_time.in_time_zone('Sydney').strftime('%d/%m/%y %H:%M') %>
+  </p>
+
+  <p>
+    <strong>End time:</strong>
+    <%= event.end_time.in_time_zone('Sydney').strftime('%d/%m/%y %H:%M') %>
+  </p>
+
+</div>
