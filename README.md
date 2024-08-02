@@ -23,3 +23,5 @@ Notes
 - this work could be placed into a low priority queue if there are other, more important background jobs
 - Some validation is handled by database constraints, eg `null: false` for manager_id on the `events` table
 - Some validation is handled at the model level, eg checking that a note has a manager _or_ a report
+- Some validation is handled by the CreateEvent service, eg checking that the manager does not already have a scheduled event at the time the report has requested
+- the note entry form on the event page uses hotwire broadcast to append the note onto the event page without a page refresh
